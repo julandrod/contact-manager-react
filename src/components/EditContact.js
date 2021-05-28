@@ -1,28 +1,37 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const AddContact = ({ addContactHandler }) => {
-  const [contact, setContact] = useState({ name: "", email: "" });
+const EditContact = (props) => {
+    console.log(props)
+  const { id, name, email } = props.location.state.contact;
+
+  const [contact, setContact] = useState({
+    id,
+    name,
+    email,
+  });
 
   const history = useHistory();
 
-  const add = (e) => {
+  const update = (e) => {
     e.preventDefault();
     if (contact.name === "" || contact.email === "") {
       alert("All the fields are mandatory");
       return;
     }
-    addContactHandler(contact);
+    props.updateContactHandler(contact);
     setContact({ name: "", email: "" });
     history.push("/");
   };
 
   return (
     <div className="ui main">
-      <h2>Add Contact</h2>
-      <form className="ui form" onSubmit={add}>
+      <h2>Edit Contact</h2>
+      <form className="ui form" onSubmit={update}>
         <div className="field">
-          <label>Name <span style={{color:"red"}}>(*)</span></label>
+          <label>
+            Name <span style={{ color: "red" }}>(*)</span>
+          </label>
           <input
             type="text"
             name="name"
@@ -32,7 +41,9 @@ const AddContact = ({ addContactHandler }) => {
           />
         </div>
         <div className="field">
-          <label>Email <span style={{color:"red"}}>(*)</span></label>
+          <label>
+            Email <span style={{ color: "red" }}>(*)</span>
+          </label>
           <input
             type="email"
             name="email"
@@ -41,10 +52,10 @@ const AddContact = ({ addContactHandler }) => {
             onChange={(e) => setContact({ ...contact, email: e.target.value })}
           />
         </div>
-        <button className="ui button blue">Add</button>
+        <button className="ui button blue">Update</button>
       </form>
     </div>
   );
 };
 
-export default AddContact;
+export default EditContact;

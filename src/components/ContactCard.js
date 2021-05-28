@@ -8,7 +8,7 @@ const ContactCard = ({ contact, deleteContactHandler }) => {
     <div className="item">
       <img className="ui avatar image" src={user} alt="user" />
       <div className="content">
-        <Link to={{ pathname: `/contact/${id}`, state: { contact }, payload: {deleteContactHandler }}}>
+        <Link to={{ pathname: `/contact/${id}`, state: { contact } }}>
           <div className="header">{name}</div>
           <div>{email}</div>
         </Link>
@@ -16,8 +16,15 @@ const ContactCard = ({ contact, deleteContactHandler }) => {
       <Link to={{ pathname: `/delete/${id}`, state: { contact } }}>
         <i
           className="trash alternate outline icon"
-          style={{ color: "red", marginTop: "7px" }}
-          // onClick={() => deleteContactHandler(id)}
+          style={{ color: "red", marginTop: "7px", marginLeft: "10px" }}
+        // onClick={() => deleteContactHandler(id)}
+        ></i>
+      </Link>
+      <Link to={{ pathname: `/edit`, state: { contact } }}>
+        <i
+          className="edit alternate outline icon"
+          style={{ color: "blue", marginTop: "7px" }}
+        // onClick={() => deleteContactHandler(id)}
         ></i>
       </Link>
     </div>
