@@ -14,6 +14,8 @@ const BASE_URL = "http://localhost:3006";
 function App() {
   // const LOCAL_STORAGE_KEY = "contacts";
   const [contacts, setContacts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const getAllContacts = async () => {
     const response = await fetch(`${BASE_URL}/contacts`);
@@ -74,6 +76,19 @@ function App() {
     setContacts(newContactList);
   };
 
+  useEffect(() => {
+    const searchHandler = (searchTerm) => {
+      const newContactList = contacts.filter(contact => {
+        return Object.values(contact)
+          .join(' ')
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      });
+      setSearchResults(newContactList);
+    }
+    searchHandler(searchTerm);
+  }, [searchTerm]);
+
   // Retrive the contancts from the local storage
   useEffect(() => {
     // -- This code is for local storage
@@ -99,8 +114,10 @@ function App() {
             render={(props) => (
               <ContactList
                 {...props}
-                contacts={contacts}
+                contacts={searchTerm.length < 1 ? contacts : searchResults}
                 removeContactHandler={removeContactHandler}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
               />
             )}
           />

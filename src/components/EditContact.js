@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 const EditContact = (props) => {
-    console.log(props)
   const { id, name, email } = props.location.state.contact;
 
   const [contact, setContact] = useState({
