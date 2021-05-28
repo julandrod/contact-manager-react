@@ -8,16 +8,18 @@ const ContactCard = ({ contact, deleteContactHandler }) => {
     <div className="item">
       <img className="ui avatar image" src={user} alt="user" />
       <div className="content">
-        <Link to={{pathname: `/contact/${id}`, state:{contact}}}>
+        <Link to={{ pathname: `/contact/${id}`, state: { contact }, payload: {deleteContactHandler }}}>
           <div className="header">{name}</div>
           <div>{email}</div>
         </Link>
       </div>
-      <i
-        className="trash alternate outline icon"
-        style={{ color: "red", marginTop: "7px" }}
-        onClick={() => deleteContactHandler(id)}
-      ></i>
+      <Link to={{ pathname: `/delete/${id}`, state: { contact } }}>
+        <i
+          className="trash alternate outline icon"
+          style={{ color: "red", marginTop: "7px" }}
+          // onClick={() => deleteContactHandler(id)}
+        ></i>
+      </Link>
     </div>
   );
 };

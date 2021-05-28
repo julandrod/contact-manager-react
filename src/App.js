@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import AddContact from "./components/AddContact";
 import ContactList from "./components/ContactList";
 import ContactDetail from "./components/ContactDetail";
+import DeleteContact from "./components/DeleteContact";
 
 function App() {
   const LOCAL_STORAGE_KEY = "contacts";
@@ -54,6 +55,15 @@ function App() {
             )}
           />
           <Route path="/contact/:id" component={ContactDetail} />
+          <Route
+            path="/delete/:id"
+            render={(props) => (
+              <DeleteContact
+                {...props}
+                removeContactHandler={removeContactHandler}
+              />
+            )}
+          />
         </Switch>
       </Router>
     </div>
