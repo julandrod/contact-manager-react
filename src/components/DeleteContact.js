@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const DeleteContact = (props) => {
   const { id } = props.location.state.contact;
-  console.log(id);
 
   return (
     <div className="main">

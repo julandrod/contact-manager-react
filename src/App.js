@@ -62,16 +62,13 @@ function App() {
   }
 
   const removeContactHandler = async (id) => {
-    const response = await fetch(`${BASE_URL}/contacts/${id}`, {
+     await fetch(`${BASE_URL}/contacts/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       }
     });
-
-    const data = await response.json()
-    console.log(data);
-
+    
     const newContactList = contacts.filter((contact) => contact.id !== id);
     setContacts(newContactList);
   };
